@@ -1,14 +1,13 @@
-//Package errow creates error with context and adds line number as a prefix
-//of the text representation of the given error
-//`<package/file.go:15>: error message`.
+// Package errow creates error with context and adds line number as a prefix
+// of the text representation of the given error
+// `<package/file.go:15>: error message`.
 //
-//Also, it puts the error to a stack of errors thanks to github.com/pkg/errors
-//and you can also print the stack via formatted output `"%+v"`.
-//Names of methods are similar to redefined methods of github.com/pkg/errors
-//and provides similar (but in some cases not the same) interface.
-//You can replace github.com/pkg/errors to github.com/nordborn/go-errow but not
-//in another direction
-
+// Also, it puts the error to a stack of errors thanks to github.com/pkg/errors
+// and you can also print the stack via formatted output `"%+v"`.
+// Names of methods are similar to redefined methods of github.com/pkg/errors
+// and provides similar (but in some cases not the same) interface.
+// You can replace github.com/pkg/errors to github.com/nordborn/go-errow but not
+// in another direction
 
 package errow
 
