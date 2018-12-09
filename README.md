@@ -84,18 +84,18 @@ github.com/nordborn/go-errow.Wrap
 github.com/nordborn/go-errow.TestWrap
         /media/.../go-errow/errow_test.go:13
 testing.tRunner
-        /home/vladimirb/go1.11/src/testing/testing.go:827
+        /home/.../testing/testing.go:827
 runtime.goexit
-        /home/vladimirb/go1.11/src/runtime/asm_amd64.s:1333
+        /home/.../runtime/asm_amd64.s:1333
 <go-errow/errow_test.go:14>
 github.com/nordborn/go-errow.Wrap
         /media/.../go-errow/errow.go:95
 github.com/nordborn/go-errow.TestWrap
         /media/.../go-errow/errow_test.go:14
 testing.tRunner
-        /home/.../testing.go:827
+        /home/.../testing/testing.go:827
 runtime.goexit
-        /home/.../asm_amd64.s:1333
+        /home/.../runtime/asm_amd64.s:1333
         
 --- end of stack trace of the error ---
 
