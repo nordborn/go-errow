@@ -14,8 +14,9 @@ func TestWrap(t *testing.T) {
 	errww := Wrap(errw)
 	log.Println(errw)
 	log.Println(errww)
-	fmt.Printf("\n--- stack trace of the error ---\n\n")
+	fmt.Print("\n--- stack trace of the error ---\n\n")
 	log.Printf("%+v", errww)
+	fmt.Print("\n--- end of stack trace of the error ---\n\n")
 	ok := strings.Contains(fmt.Sprint(errww), "errow/errow_test.go:")
 	if !ok {
 		t.Error(errw)

@@ -8,7 +8,7 @@ of the text representation of the given error
 Also, it puts the error to a stack of errors thanks to github.com/pkg/errors
 and you can also print the stack via formatted output `"%+v"`.
 Names of methods are similar to redefined methods of github.com/pkg/errors
-and provides similar (but in some cases not the same) interface.
+and provide similar (but in some cases not the same) interface.
 You can replace github.com/pkg/errors to github.com/nordborn/go-errow but not
 in another direction
 
@@ -67,4 +67,41 @@ func Wrap(err error, v ...interface{}) error {}
 //   }
 //
 func Wrapf(err error, format string, v ...interface{}) error {}
+```
+
+Example output of `go test`:
+
+```
+2018/12/09 15:55:55 <go-errow/errow_test.go:13> wrapped error: my error
+2018/12/09 15:55:55 <go-errow/errow_test.go:14>: <go-errow/errow_test.go:13> wrapped error: my error
+
+--- stack trace of the error ---
+
+2018/12/09 15:55:55 my error
+<go-errow/errow_test.go:13> wrapped error
+github.com/nordborn/go-errow.Wrap
+        /media/.../go-errow/errow.go:95
+github.com/nordborn/go-errow.TestWrap
+        /media/.../go-errow/errow_test.go:13
+testing.tRunner
+        /home/vladimirb/go1.11/src/testing/testing.go:827
+runtime.goexit
+        /home/vladimirb/go1.11/src/runtime/asm_amd64.s:1333
+<go-errow/errow_test.go:14>
+github.com/nordborn/go-errow.Wrap
+        /media/.../go-errow/errow.go:95
+github.com/nordborn/go-errow.TestWrap
+        /media/.../go-errow/errow_test.go:14
+testing.tRunner
+        /home/.../testing.go:827
+runtime.goexit
+        /home/.../asm_amd64.s:1333
+        
+--- end of stack trace of the error ---
+
+<go-errow/errow_test.go:26> error: err text
+<go-errow/errow_test.go:36> error: [1 2 3]
+PASS
+ok      github.com/nordborn/go-errow    0.003s
+
 ```
