@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/nordborn/go-errow.svg?branch=master)](https://travis-ci.org/nordborn/go-errow)
+[![Code Coverage](https://codecov.io/gh/nordborn/go-errow/branch/master/graph/badge.svg)](https://codecov.io/gh/nordborn/go-errow/branch/master/graph/badge.svg)
+
+
 **Package errow is a wrapper for errors in Go (Golang) that makes them more informative**.
 
 
