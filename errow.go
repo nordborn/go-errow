@@ -8,7 +8,6 @@
 // and provides similar (but in some cases not the same) interface.
 // You can replace github.com/pkg/errors to github.com/nordborn/go-errow but not
 // in another direction
-
 package errow
 
 import (
@@ -54,9 +53,9 @@ func msgf(format string, v ...interface{}) string {
 // New also records the stack trace at the point it was called.
 // Example:
 //
-//   if err != nil {
-// 	   return errow.New("my context: ", err)
-//   }
+//	if err != nil {
+//		return errow.New("my context: ", err)
+//	}
 //
 func New(v ...interface{}) error {
 	return errors.New(msg(v...))
@@ -67,9 +66,9 @@ func New(v ...interface{}) error {
 // Newf also records the stack trace at the point it was called.
 // Example:
 //
-//   if err != nil {
-// 	   return errow.Newf("val1=%v and val2=%v", val1, val2)
-//   }
+//	if err != nil {
+//		return errow.Newf("val1=%v and val2=%v", val1, val2)
+//	}
 //
 func Newf(format string, v ...interface{}) error {
 	return errors.New(msgf(format, v...))
@@ -82,13 +81,13 @@ func Newf(format string, v ...interface{}) error {
 // the text of the error
 // Example:
 //
-//   if err != nil {
-// 	   return errow.Wrap(err)
-//   }
+//	if err != nil {
+//		return errow.Wrap(err)
+//	}
 //
-//   if err2 != nil {
-// 	   return errow.Wrap(err2, "important notice")
-//   }
+//	if err2 != nil {
+//		return errow.Wrap(err2, "important notice")
+//	}
 //
 func Wrap(err error, v ...interface{}) error {
 	return errors.Wrap(err, msg(v...))
@@ -101,9 +100,9 @@ func Wrap(err error, v ...interface{}) error {
 // the text of the error
 // Example
 //
-//   if err != nil {
-// 	   return errow.Wrap(err, "got err on vals: val1=%v val2=%v", val1, val2)
-//   }
+//	if err != nil {
+//		return errow.Wrap(err, "got err on vals: val1=%v val2=%v", val1, val2)
+//	}
 //
 func Wrapf(err error, format string, v ...interface{}) error {
 	return errors.Wrap(err, msgf(format, v...))
