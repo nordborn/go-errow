@@ -101,7 +101,7 @@ func Wrap(err error, v ...interface{}) error {
 // Example
 //
 //	if err != nil {
-//		return errow.Wrap(err, "got err on vals: val1=%v val2=%v", val1, val2)
+//		return errow.Wrapf(err, "got err on vals: val1=%v val2=%v", val1, val2)
 //	}
 //
 func Wrapf(err error, format string, v ...interface{}) error {
