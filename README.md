@@ -7,7 +7,18 @@
 
 Package errow creates error with context and adds line number as a prefix
 of the text representation of the given error
-`<package/file.go:15>: error message`.
+`<folder/file.go:15>: error message`.
+
+Example:
+
+```Go
+// regular error
+err := errors.New("my error")
+// wrapped error
+errW := Wrap(err, "wrapped error")
+fmt.Println(errW)
+// Output: <go-errow/errow_test.go:47> wrapped error: my error
+```
 
 Also, it puts the error to a stack of errors thanks to github.com/pkg/errors
 and you can also print the stack via formatted output `"%+v"`.
@@ -109,3 +120,5 @@ PASS
 ok      github.com/nordborn/go-errow    0.003s
 
 ```
+
+Godoc: https://godoc.org/github.com/nordborn/go-errow
