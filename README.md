@@ -17,7 +17,7 @@ err := errors.New("my error")
 // wrapped error
 errW := Wrap(err, "wrapped error")
 fmt.Println(errW)
-// Output: <go-errow/errow_test.go:47> wrapped error: my error
+// Output: <mypackagefolder/main.go:47> wrapped error: my error
 ```
 
 Also, it puts the error to a stack of errors thanks to github.com/pkg/errors
