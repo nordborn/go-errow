@@ -12,11 +12,14 @@ package errow
 
 import (
 	"fmt"
-	"github.com/pkg/errors"
 	"path/filepath"
 	"runtime"
 	"strings"
+
+	"github.com/pkg/errors"
 )
+
+const defaultSkip = 4
 
 // /home/.../.../go/src/very/long/path/mypackage/myfile.go -> mypackage/mypath.go
 func shorterFilePath(fPath string) string {
@@ -38,13 +41,13 @@ func getFileLine(skip int) (string, int) {
 	return fPath, line
 }
 
-func msg(v ...interface{}) string {
-	fPath, line := getFileLine(3)
+func msg(skip int, v ...any) string {
+	fPath, line := getFileLine(skip)
 	return strings.Trim(fmt.Sprint(traceInfo(fPath, line), " ", fmt.Sprint(v...)), " ")
 }
 
-func msgf(format string, v ...interface{}) string {
-	fPath, line := getFileLine(3)
+func msgf(skip int, format string, v ...any) string {
+	fPath, line := getFileLine(skip)
 	return strings.Trim(fmt.Sprint(traceInfo(fPath, line), " ", fmt.Sprintf(format, v...)), " ")
 }
 
@@ -56,9 +59,13 @@ func msgf(format string, v ...interface{}) string {
 //	if err != nil {
 //		return errow.New("my context: ", err)
 //	}
-//
-func New(v ...interface{}) error {
-	return errors.New(msg(v...))
+func New(v ...any) error {
+	return NewSkip(defaultSkip, v...)
+}
+
+// NewSkip like New but accepts number of frames to skip
+func NewSkip(skip int, v ...any) error {
+	return errors.New(msg(skip, v...))
 }
 
 // Newf creates new error from formatted text representation
@@ -69,9 +76,13 @@ func New(v ...interface{}) error {
 //	if err != nil {
 //		return errow.Newf("val1=%v and val2=%v", val1, val2)
 //	}
-//
-func Newf(format string, v ...interface{}) error {
-	return errors.New(msgf(format, v...))
+func Newf(format string, v ...any) error {
+	return NewfSkip(defaultSkip, format, v...)
+}
+
+// NewfSkip like Newf but accepts number of frames to skip
+func NewfSkip(skip int, format string, v ...any) error {
+	return errors.New(msgf(skip, format, v...))
 }
 
 // Wrap returns an error annotating err with a stack trace at
@@ -88,9 +99,13 @@ func Newf(format string, v ...interface{}) error {
 //	if err2 != nil {
 //		return errow.Wrap(err2, "important notice")
 //	}
-//
-func Wrap(err error, v ...interface{}) error {
-	return errors.Wrap(err, msg(v...))
+func Wrap(err error, v ...any) error {
+	return WrapSkip(defaultSkip, err, v...)
+}
+
+// WrapSkip like Wrap but accepts number of frames to skip
+func WrapSkip(skip int, err error, v ...any) error {
+	return errors.Wrap(err, msg(skip, v...))
 }
 
 // Wrapf returns an error annotating err with a stack
@@ -103,7 +118,11 @@ func Wrap(err error, v ...interface{}) error {
 //	if err != nil {
 //		return errow.Wrapf(err, "got err on vals: val1=%v val2=%v", val1, val2)
 //	}
-//
-func Wrapf(err error, format string, v ...interface{}) error {
-	return errors.Wrap(err, msgf(format, v...))
+func Wrapf(err error, format string, v ...any) error {
+	return WrapfSkip(defaultSkip, err, format)
+}
+
+// WrapfSkip like Wrapf but accepts number of frames to skip
+func WrapfSkip(skip int, err error, format string, v ...any) error {
+	return errors.Wrap(err, msgf(skip, format, v...))
 }
